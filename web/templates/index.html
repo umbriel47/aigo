@@ -448,19 +448,6 @@
             </div>
         </div>      
     </div>
-    <div class='goControls'>
-        <div class='controlRow'>
-            <div class='back'>back</div>
-            <div class='play'>play</div>
-            <div class='forward'>forward</div>
-        </div>
-            <!--
-            <div class='treeBox'>
-                <div class='tree'></div>
-            </div>
-            -->
-    </div>
-
     
     <!--Dynamic switch between three blocks-->
     
@@ -470,6 +457,10 @@
         <div id="votemove" class="container">
         <form class="form-vote" action="/game/123456" method="POST">
             <input id="current_try_move" name="move" value="">
+            <select name="strategy"> 
+                <option value="Random">random</option> 
+                <option value="Cnn">cnn</option> 
+            </select>
             <button class="btn-sub btn-primary" type="vote">就这步了</button>
             <!--
             <button class="btn-reset btn-primary" type="reset">换一下</button>
@@ -489,7 +480,6 @@
     </footer>
     <script type="text/javascript">
         var game_moves = "{{ moves }}";
-        console.log(game_moves)
     </script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script src="static/js/gameboard.js"></script>   

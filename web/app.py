@@ -16,22 +16,28 @@ from aigo.engine.game import Game
 app = Flask(__name__)
 app.secret_key = 'aigoisafunnygamehahahahaha'
 
+
+
 @app.route('/')
 def index():
     if 'moves' not in session.keys():
         session['moves'] = ''
     return render_template('index.html', moves=session['moves'])
 
-@app.route('/game/<id>', methods=['POST', 'GET'])
+@app.route('/game/<id>', methods=['POST'])
 def game(id='default'):
-    if request.method == 'GET':
-        return 'game get request %s' % id
     if request.method == 'POST':
         move = request.form.get('move')
+        strategy = request.form.get('strategy')
         if session['moves'] == '':
             session['moves'] = move
+            session['strategy'] = strategy
         else:
             session['moves'] = session['moves'] + ',' + move
+        # get the AI move
+        ai_move = Game(session['strategy']).get_move(session['moves'])
+        session['moves'] = session['moves'] + ',' + ai_move
+
         return redirect(url_for('index'))
 
 if __name__ == '__main__':
