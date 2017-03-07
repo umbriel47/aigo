@@ -1,0 +1,301 @@
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#board19{
+	margin:0 auto;
+}
+
+.goGame {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.goGame div {
+  margin: 0;
+  padding: 0 auto;
+}
+
+.goGame .goBoard {
+  margin-top: 20px; 
+  margin-left: 300px;   
+  display: inline-block;
+  border: 1px solid #522;
+  background-color:#ffc47f;
+  -moz-box-shadow: 0 0 2em rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 2em rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 2em rgba(0, 0, 0, 0.5);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.goGame .labels {
+  color: #a67359;
+  font-family: Righteous;
+  font-size: 12px;
+  position: absolute;
+}
+
+.goGame .labels.horizontal.top {
+  margin-left: 318px;
+  letter-spacing: 21px;
+}
+
+.goGame .labels.horizontal.bottom {
+  letter-spacing: 21px;
+  left: 323px;
+  top: 664px;
+}
+
+.goGame .labels.vertical.left {
+  word-wrap: break-word;  
+  line-height: 15px;
+  left: 287px;
+  top: 86px;
+}
+.goGame .labels.vertical.right {
+  word-wrap: break-word;  
+  line-height: 15px;
+  left: 920px;
+  top: 87px;
+}
+
+
+
+.goGame.white .goBoard .cell:not(.black):not(.white):hover:after {
+  left: 0;
+  box-sizing: border-box;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 1px 1px 1px #404040 , inset -3px -3px 5px gray;
+  opacity: 0.5;
+}
+.goGame.white .goBoard .cell:not(.black):not(.white):hover:before {
+  display: none;
+}
+.goGame.black .goBoard .cell:not(.black):not(.white):hover:after {
+  box-sizing: border-box;
+  left: 0;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 1px 1px 1px #404040;
+  background-image: -webkit-radial-gradient(40% 40%, circle closest-corner, #404040 0%, transparent 90%);
+  background-image: -moz-radial-gradient(40% 40%, circle closest-side, #404040 0%, transparent 90%);
+  opacity: 0.5;
+}
+.goGame.black .goBoard .cell:not(.black):not(.white):hover:before {
+  display: none;
+}
+.goGame .goBoard .row {
+  font-size: 0px;
+}
+.goGame .goBoard .row .cell {
+  width: 30px;     /* 20px*/
+  height: 30px;   /* 21px*/
+  display: inline-block;
+  position: relative;
+}
+.goGame .goBoard .row .cell:after {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  content: "";
+  background-color: #522;
+  width: 100%;
+  height: 1px;
+}
+.goGame .goBoard .row .cell:before {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  content: "";
+  background-color: #522;
+  width: 1px;
+  height: 100%;
+}
+.goGame .goBoard .row .cell:first-child:after {
+  width: 50%;
+  left: 50%;
+}
+.goGame .goBoard .row .cell:last-child:after {
+  width: 50%;
+  right: 50%;
+}
+.goGame .goBoard .row .cell.star {
+  background-image: -webkit-radial-gradient(center, circle closest-side, #522 20%, transparent 30%);
+  background-image: -moz-radial-gradient(center, circle closest-side, #522 20%, transparent 30%);
+}
+.goGame .goBoard .row .cell.dead:after {
+  opacity: 0.5;
+}
+.goGame .goBoard .row .cell.dead:before {
+  display: none;
+}
+.goGame .goBoard .row .cell.black:after {
+  box-sizing: border-box;
+  left: 0;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 1px 1px 1px #404040;
+  background-image: -webkit-radial-gradient(40% 40%, circle closest-corner, #404040 0%, transparent 90%);
+  background-image: -moz-radial-gradient(40% 40%, circle closest-side, #404040 0%, transparent 90%);
+}
+.goGame .goBoard .row .cell.white:after {
+  left: 0;
+  box-sizing: border-box;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 1px 1px 1px #404040 , inset -3px -3px 5px gray;
+}
+.goGame .goBoard .row .cell.counted-black {
+  background-color: black;
+}
+.goGame .goBoard .row .cell.counted-white {
+  background-color: white;
+}
+.goGame .goBoard .row:first-child .cell:before {
+  height: 50%;
+  top: 50%;
+}
+.goGame .goBoard .row:last-child .cell:before {
+  height: 50%;
+  bottom: 50%;
+}
+
+
+/*--------------控件--------------------------*/
+.goControls {
+  background-color: #E9C372;
+  margin: 20px auto 0;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+	/* 
+	border-left: 7px solid rgba(200, 200, 200, 0.5);
+	border-top: 7px solid rgba(200, 200, 200, 0.2); 
+	border-right: 7px solid rgba(0, 0, 0, 0.7);
+	border-bottom: 7px solid rgba(0, 0, 0, 0.5);
+  */
+}
+
+.goControls .controlRow div {
+  display: inline-block;
+  border: 1px solid #522;
+  box-shadow: 1px 1px 1px #522;
+  border-radius:4px;
+  margin: 5px;
+  padding: 3px;
+}
+
+.goControls .controlRow div:hover {
+  background-color: #ffea89;
+}
+
+/*TreeBox*/
+
+.goControls .treeBox {
+  display: block;
+  border: 1px solid #522;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.goControls .treeBox div {
+  white-space: nowrap;
+}
+.goControls .treeBox .tree {
+  position: relative;
+  padding: 10px;
+}
+.goControls .treeBox .tree .line {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  height: 0px;
+  border: 1px solid black;
+  z-index: 1;
+  box-shadow: 1px 1px 1px #404040;
+}
+.goControls .treeBox .tree .line.active {
+  border-color: blue;
+  box-shadow: 1px 1px 1px white;
+}
+.goControls .treeBox .tree .branches {
+  display: inline-block;
+}
+.goControls .treeBox .tree .branch {
+  vertical-align: top;
+  display: block;
+}
+.goControls .treeBox .tree .branch .stone {
+  vertical-align: top;
+  position: relative;
+  top: 0px;
+  display: inline-block;
+  z-index: 10;
+  margin-left: 10px;   /*15px*/
+  margin-bottom: 5px;
+}
+.goControls .treeBox .tree .branch .stone.white {
+  left: 0;
+  box-sizing: border-box;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 1px 1px 1px #404040 , inset -3px -3px 5px gray;
+  width: 20px;        
+  height: 20px;       
+}
+.goControls .treeBox .tree .branch .stone.black {
+  box-sizing: border-box;
+  left: 0;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 1px 1px 1px #404040;
+  background-image: -webkit-radial-gradient(40% 40%, circle closest-corner, #404040 0%, transparent 90%);
+  background-image: -moz-radial-gradient(40% 40%, circle closest-side, #404040 0%, transparent 90%);
+  width: 20px;
+  height: 20px;
+}
+.goControls .treeBox .tree .branch .stone.start {
+  background-color: #E9C372;
+  border-radius: 50%;
+  border: 1px solid black;
+  box-shadow: 1px 1px 1px #404040;
+  width: 20px;
+  height: 20px;
+}
+.goControls .treeBox .tree .branch .stone.current {
+  border: 2px solid red;
+  box-shadow: 1px 1px 1px black;
+}
+/*------------end of 控件--------------------*/
+
