@@ -6,7 +6,7 @@ from strategies import utils
 
 class Game(object):
     def __init__(self, strategy=0):
-        self.coord = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q']
+        self.coord = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S']
         self.strategy = utils.get_strategy(strategy)()
         self.MAX_TRIAL = 100
 

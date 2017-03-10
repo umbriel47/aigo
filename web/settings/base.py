@@ -1,7 +1,11 @@
 # encoding: utf-8
 
+import os
+
+# TODO: change confidentials to environment variables
+
 DEBUG = True
-MONGO_HOST = '139.224.191.114'
-MONGO_USERNAME = 'aigo_test'
-MONGO_PASSWORD = 'aigo_test'
-MONGO_DATABASE = 'aigo'
+MONGO_HOST = os.environ.get('MONGO_HOST')
+MONGO_USERNAME = os.environ.get('MONGO_USERNAME')
+MONGO_PASSWORD = os.environ.get('MONGO_PWD')
+MONGO_PORT = os.environ.get('MONGO_PORT')
