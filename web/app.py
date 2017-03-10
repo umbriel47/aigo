@@ -37,7 +37,6 @@ def index():
 def user(userid):
     return render_template('user.html', userid=userid)
 
-
 @app.route('/signin', methods=['GET', 'POST'])
 def signin():
     """user sign in
