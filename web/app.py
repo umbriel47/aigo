@@ -6,6 +6,11 @@ import os
 from flask import Flask, request, url_for
 from flask import render_template, redirect
 from flask import session
+from flask_bootstrap import Bootstrap
+import pymongo
+import datetime
+import hashlib
+from settings import settings
 
 path = os.path.abspath(__file__)
 sys.path.append(path)
@@ -16,13 +21,75 @@ from aigo.engine.game import Game
 app = Flask(__name__)
 app.secret_key = 'aigoisafunnygamehahahahaha'
 
+bootstrap = Bootstrap(app)
 
+db = pymongo.MongoClient('mongodb://%s:%s@%s:%s' % (settings['MONGO_USERNAME'], 
+                                                    settings['MONGO_PASSWORD'],
+                                                    settings['MONGO_HOST'],
+                                                    settings['MONGO_PORT'])).aigo
 
 @app.route('/')
 def index():
-    if 'moves' not in session.keys():
+    return render_template('index.html')
+
+@app.route('/user/<userid>', methods=['GET'])
+def user(userid):
+    return render_template('user.html', userid=userid)
+
+
+@app.route('/signin', methods=['GET', 'POST'])
+def signin():
+    """user sign in
+    """
+    if request.method == 'GET':
+        return render_template('signin.html')
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = hashlib.md5(request.form.get('pwd')).hexdigest()
+        users = db.users.find(dict(email=email))
+        for user in users:
+            if password == user['pwd']:
+                return redirect(url_for('user', userid=user['_id']))
+        return render_template('signin.html')
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    """user sign up
+    """
+    if request.method == 'GET':
+        return render_template('signup.html')
+    if request.method == 'POST':
+        email = request.form.get('email')
+        print email
+        print db.users.find_one(dict(email=email))
+        if db.users.find_one(dict(email=email)) is None:
+            password = hashlib.md5(request.form.get('pwd')).hexdigest()
+            current = datetime.datetime.utcnow()
+            try:
+                print "start saving"
+                db.users.save(dict(email=email,
+                               pwd=password,
+                               timestamp=current
+                              )
+                         )
+                print "succeed"
+            except Exception, e:
+                print 'Error creating user: %s' % e
+                return render_template(url_for('signup'))
+            userid_in = db.users.find_one({"email": email})['_id']
+            print "get userid"
+            return redirect(url_for('user', userid=userid_in))
+        else:
+            return redirect(url_for('signin'))
+
+
+@app.route('/restart', methods=['POST'])
+def restart():
+    """restart the game
+    """
+    if 'moves' in session.keys():
         session['moves'] = ''
-    return render_template('index.html', moves=session['moves'])
+    return redirect(url_for('index'))
 
 @app.route('/game/<id>', methods=['POST'])
 def game(id='default'):
