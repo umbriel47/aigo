@@ -6,6 +6,7 @@ import os
 from flask import Flask, request, url_for
 from flask import render_template, redirect
 from flask import session
+from flask import flash
 from flask_bootstrap import Bootstrap
 import pymongo
 import datetime
@@ -50,6 +51,7 @@ def signin():
         for user in users:
             if password == user['pwd']:
                 return redirect(url_for('user', userid=user['_id']))
+        flash("User doesn't exist or wrong password")
         return render_template('signin.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -66,20 +68,21 @@ def signup():
             password = hashlib.md5(request.form.get('pwd')).hexdigest()
             current = datetime.datetime.utcnow()
             try:
-                print "start saving"
                 db.users.save(dict(email=email,
                                pwd=password,
                                timestamp=current
                               )
                          )
-                print "succeed"
+                print "user sign up succeed"
             except Exception, e:
                 print 'Error creating user: %s' % e
+                flash("Error in registering")
                 return render_template(url_for('signup'))
             userid_in = db.users.find_one({"email": email})['_id']
             print "get userid"
             return redirect(url_for('user', userid=userid_in))
         else:
+            flash("You have registered, please sign-in")
             return redirect(url_for('signin'))
 
 
@@ -91,21 +94,26 @@ def restart():
         session['moves'] = ''
     return redirect(url_for('index'))
 
-@app.route('/game/<id>', methods=['POST'])
+@app.route('/game', methods=['POST'])
 def game(id='default'):
-    if request.method == 'POST':
-        move = request.form.get('move')
-        strategy = request.form.get('strategy')
-        if session['moves'] == '':
-            session['moves'] = move
-            session['strategy'] = strategy
-        else:
-            session['moves'] = session['moves'] + ',' + move
-        # get the AI move
-        ai_move = Game(session['strategy']).get_move(session['moves'])
-        session['moves'] = session['moves'] + ',' + ai_move
+    return render_template('game.html', moves='QQ')
 
-        return redirect(url_for('index'))
+
+# @app.route('/getmove', method=['POST'])
+# def getmove():
+#     move = request.form.get('move')
+#     strategy = request.form.get('strategy')
+#     if session['moves'] == '':
+#         session['moves'] = move
+#         session['strategy'] = strategy
+#     else:
+#         session['moves'] = session['moves'] + ',' + move
+#     # get the AI move
+#     ai_move = Game(session['strategy']).get_move(session['moves'])
+#     session['moves'] = session['moves'] + ',' + ai_move
+
+#     return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
     app.run(host='localhost', port=8000, debug=True)
