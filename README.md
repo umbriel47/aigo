@@ -17,6 +17,11 @@ board and basic game logic is borrowd from [IreneZhou/]()
 -----------
 
 ## Version history (to be put to wiki) ##
+_v0.3.0
+
+- Save game
+- Load game
+
 _v0.2.0_
 
 - Start game function

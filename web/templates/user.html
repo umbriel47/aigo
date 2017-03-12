@@ -2,14 +2,19 @@
 {% block content %}
 <div>
     <h1>Welcome {{ userid }}</h1>
-    <form action="/game" method="POST">
+    <form action="/creategame" method="POST">
         <input type="radio" name="color" value="Black" checked="checked">执黑</input>
         <input type="radio" name="color" value="White" checked="checked">执白</input>
-        <select name="opponent">
-            <option value="random">Random</option>
+        <select name="strategy">
+            <option value="Random">Random</option>
             <option value="cnn">CNN(todo)</option>
         </select>
         <button type="submit">开始新游戏</button>
     </form>
+    <ul>
+        {% for game in games %}
+            <li>{{ game[0] }} <a href="{{ url_for('load_game', gamename=game[1]) }}">load</a></li>
+        {% endfor %}
+    </ul>
 </div>
 {% endblock %}
