@@ -5,7 +5,7 @@
 
 **Acknowledgement:**
 
-board and basic game logic is borrowd from [IreneZhou/]()
+board and basic game logic is borrowd from [IreneZhou/Go-Board](https://github.com/IreneZhou/Go-Board)
 
 
 ## Introduction ##
