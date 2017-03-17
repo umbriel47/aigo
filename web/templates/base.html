@@ -98,7 +98,7 @@
   <header class="am-topbar am-topbar-fixed-top">
     <div class="am-container">
       <h1 class="am-topbar-brand">
-        <a href="#">Amaze AI</a>
+        <a href="{{ url_for('index') }}">Amaze AI</a>
       </h1>
 
       <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-secondary am-show-sm-only"
@@ -107,20 +107,9 @@
 
       <div class="am-collapse am-topbar-collapse" id="collapse-head">
         <ul class="am-nav am-nav-pills am-topbar-nav">
-          <li class="am-active"><a href="#">首页</a></li>
-        <!-- <li><a href="#">项目</a></li>
-        <li class="am-dropdown" data-am-dropdown>
-          <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
-            下拉菜单 <span class="am-icon-caret-down"></span>
-          </a>
-          <ul class="am-dropdown-content">
-            <li class="am-dropdown-header">标题</li>
-            <li><a href="#">1. 默认样式</a></li>
-            <li><a href="#">2. 基础设置</a></li>
-            <li><a href="#">3. 文字排版</a></li>
-            <li><a href="#">4. 网格系统</a></li>
-          </ul>
-        </li> -->
+          {% if current_user.is_authenticated %}
+          <li><a href="{{ url_for('user') }}">控制台</a></li>
+          {% endif %}
       </ul>
       {% if current_user.is_authenticated %}
       <div class="am-topbar-right">
@@ -130,20 +119,6 @@
       </div>
 
       {% else %}
-      <!-- <div class="am-topbar-right">
-        <form action="/signup" method="POST">
-          <button type="submit" class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-pencil"></span> 注册</button>
-        </form>
-      </div>
-
-      <div class="am-topbar-right">
-        <form action="/signup" method="POST">
-          <button type="submit" class="am-btn am-btn-primary am-topbar-btn am-btn-sm"><span class="am-icon-user" ></span> 登录</button>
-        </form>
-      </div> -->
-
-      
-      
       {% endif %}
     </div>
   </div>
@@ -158,22 +133,20 @@
  {% endfor %}
 </div>
 <div id="content">{% block content %}{% endblock %}</div>
-
 <footer class="footer">
-  <p>© 2014 <a href="http://www.yunshipei.com" target="_blank">AllMobilize, Inc.</a> Licensed under <a
-    href="http://opensource.org/licenses/MIT" target="_blank">MIT license</a>. by the AmazeUI Team.</p>
-  </footer>
+  <p>© 2017 Licensed under <a href="http://opensource.org/licenses/MIT" target="_blank">MIT license</a>. by Umbriel</p>
+</footer>
 
 <!--[if lt IE 9]>
 <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<script src="../static/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-<!-- <script src="static/js/jquery.min.js"></script> -->
+<script src="../static/js/jquery.min.js"></script>
 <!--<![endif]-->
-<!-- <script src="static/js/amazeui.min.js"></script> -->
+<script src="../static/js/amazeui.min.js"></script>
 </body>
 </html>
 

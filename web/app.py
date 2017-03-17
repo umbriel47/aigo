@@ -59,7 +59,7 @@ def user():
     games_lst = []
     games = db.games.find(dict(email=current_user.email))
     for game in games:
-        game_lst = [game['timestamp'], game['gamename']]
+        game_lst = [game['timestamp'], game['strategy'], game['gamename']]
         games_lst.append(game_lst)
     print games_lst
     return render_template('user.html', games=games_lst)
@@ -118,7 +118,7 @@ def signup():
             print "get userid"
             return redirect(url_for('user'))
         else:
-            flash("You have registered, please sign-in")
+            flash("You have already registered, please sign-in")
             return redirect(url_for('index'))
 
 
@@ -209,7 +209,6 @@ def load_game(gamename):
         session['moves'] = game['moves']
         session['gamename'] = game['gamename']
     return redirect(url_for('game_view'))
-
 
 
 # @app.route('/getmove', method=['POST'])

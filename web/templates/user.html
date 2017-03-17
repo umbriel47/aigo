@@ -1,20 +1,47 @@
 {% extends "base.html" %}
 {% block content %}
 <div>
-    <h1>Welcome {{ userid }}</h1>
+</br>
+</br>
+<center>
     <form action="/creategame" method="POST">
-        <input type="radio" name="color" value="Black" checked="checked">执黑</input>
-        <input type="radio" name="color" value="White" checked="checked">执白</input>
+        <input type="radio" name="color" value="Black" checked="checked"> 执 黑</input>
+        <input type="radio" name="color" value="White" checked="checked"> 执 白</input>
+    
+        <label> AI 策 略</label>
         <select name="strategy">
             <option value="Random">Random</option>
             <option value="cnn">CNN(todo)</option>
         </select>
-        <button type="submit">开始新游戏</button>
+    </br>
+</br>
+        <button type="submit" class="am-btn am-btn-primary am-btn-sm">开始新游戏</button>
     </form>
-    <ul>
+    <hr>
+    </center>
+    <div data-am-widget="list_news" class="am-list-news am-list-news-default" >
+      <!--列表标题-->
+      <div class="am-list-news-hd am-cf">
+         <!--带更多链接-->
+         <a href="##" class="">
+          <h2>比赛记录</h2>
+          <span class="am-list-news-more am-fr">更多 &raquo;</span>
+        </a>
+        </div>
+    </div>
+
+
+
+  <div class="am-list-news-bd">
+      <ul class="am-list">
         {% for game in games %}
-            <li>{{ game[0] }} <a href="{{ url_for('load_game', gamename=game[1]) }}">load</a></li>
-        {% endfor %}
+        <li class="am-g am-list-item-dated">
+            <a href="{{ url_for('load_game', gamename=game[2]) }}">{{ game[1] }} </a>
+            <span class="am-list-date">{{ game[0] }}</span>
+        </li>
+        {% endfor %}        
     </ul>
+</div>
+
 </div>
 {% endblock %}

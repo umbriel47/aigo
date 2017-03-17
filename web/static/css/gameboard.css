@@ -20,7 +20,8 @@
 
 .goGame .goBoard {
   margin-top: 20px; 
-  margin-left: 300px;   
+  margin-left: 380px;   
+  /*position: center;*/
   display: inline-block;
   border: 1px solid #522;
   background-color:#ffc47f;
@@ -101,8 +102,8 @@
   font-size: 0px;
 }
 .goGame .goBoard .row .cell {
-  width: 30px;     /* 20px*/
-  height: 30px;   /* 21px*/
+  width: 25px;     /* 20px*/
+  height: 26px;   /* 21px*/
   display: inline-block;
   position: relative;
 }

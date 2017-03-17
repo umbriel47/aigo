@@ -9,7 +9,7 @@ COORD = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', '
 
 def update(moves, move):
     if moves == '':
-        moves += move
+        moves = move
     else:
         moves = moves + ',' + move
     return moves

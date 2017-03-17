@@ -1,16 +1,16 @@
 //(function() {
  
-var count = 0;
+  var count = 0;
 
-$('.labels.vertical').each(function (i, item) {
-  var labelsHtml = '';
-  for (var i = 1, size = 19; i <= size; i += 1) {
-    labelsHtml += '<b><br>' + i + '</br></b>';
-  }
-  $(this).html(labelsHtml);
-});
+  $('.labels.vertical').each(function (i, item) {
+    var labelsHtml = '';
+    for (var i = 1, size = 19; i <= size; i += 1) {
+      labelsHtml += '<b><br>' + i + '</br></b>';
+    }
+    $(this).html(labelsHtml);
+  });
 
-$('.labels.horizontal').each(function (i, item) {
+  $('.labels.horizontal').each(function (i, item) {
   var labels = 'ABCDEFGHJKLMNOPQRSTUVWXYZ';
   var labelsHtml = '';
   for (var i = 0, size = 19; i < size; i += 1) {
@@ -21,7 +21,7 @@ $('.labels.horizontal').each(function (i, item) {
 
 
   var GoBoard, GoCell, GoControls, GoGame, GoPlayers, GoStone, MoveBranch, TreeView,
-    bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+  bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   GoBoard = (function() {
     function GoBoard(id, game) {
