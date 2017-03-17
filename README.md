@@ -17,7 +17,7 @@ board and basic game logic is borrowd from [IreneZhou/Go-Board](https://github.c
 -----------
 
 ## Version history (to be put to wiki) ##
-_v0.3.0
+_v0.3.0_
 
 - Save game
 - Load game

@@ -69,7 +69,7 @@ def signin():
     """user sign in
     """
     if request.method == 'GET':
-        return render_template('signin.html')
+        return redirect(url_for('index'))
     if request.method == 'POST':
         email = request.form.get('email')
         password = hashlib.md5(request.form.get('pwd')).hexdigest()
@@ -80,13 +80,14 @@ def signin():
                 print current_user
                 return redirect(url_for('user'))
         flash("User doesn't exist or wrong password")
-        return render_template('signin.html')
+        return redirect(url_for('index'))
 
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
     logout_user()
     flash('You have been logged out')
+    print 'You have logged out'
     return redirect(url_for('index'))
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -94,7 +95,7 @@ def signup():
     """user sign up
     """
     if request.method == 'GET':
-        return render_template('signup.html')
+        return redirect(url_for('index'))
     if request.method == 'POST':
         email = request.form.get('email')
         print email
@@ -118,7 +119,7 @@ def signup():
             return redirect(url_for('user'))
         else:
             flash("You have registered, please sign-in")
-            return redirect(url_for('signin'))
+            return redirect(url_for('index'))
 
 
 @app.route('/game', methods=['GET', 'POST'])
